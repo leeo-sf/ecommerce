@@ -2,6 +2,7 @@
 using Ecommerce.Domain.Interfaces;
 using Ecommerce.Sharable;
 using Ecommerce.Sharable.Config;
+using Ecommerce.Sharable.Contracts;
 using Ecommerce.Sharable.DTOs;
 using Ecommerce.Sharable.Exceptions;
 using Ecommerce.Sharable.Request;
@@ -21,12 +22,27 @@ public class KeycloakApiService : IKeycloakApiService
         _keycloakApi = keycloakApi;
     }
 
-    public async Task<Result<KeycloakResponse>> ObterTokenAsync(string username, string password)
+    public async Task<Result<KeycloakResponse>> ObterTokenUsuarioAsync(string username, string password)
     {
         var request = KeycloakRequest.CreateFromConfig(_keycloakConfiguration, username, password);
-        var response = await _keycloakApi.ObterTokenAsync(request);
+        var response = await _keycloakApi.ObterTokenUsuarioAsync(request);
         return !response.IsSuccessful
             ? new KeycloakException(KeycloakExceptionDTO.GetContentError(response.Error.Content!).ErrorDescription!)
             : response.Content;
+    }
+
+    public Task<Result<KeycloakResponse>> ObterTokenClientAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Result> CriarUsuarioAsync(string tokenClient, string username, string email, string firstname, string lastname, IEnumerable<KeycloakCredentials> credentials)
+    {
+        var requestCreateUser = KeycloakGerarUsuarioRequest.CreateFromConfig(username, email, firstname, lastname, credentials);
+        var responseCreateUser = await _keycloakApi.GerarUsuarioAsync(tokenClient, requestCreateUser);
+
+        return !responseCreateUser.IsSuccessful
+            ? new Result(new KeycloakException("Falha ao criar usuário."))
+            : new Result(true);
     }
 }

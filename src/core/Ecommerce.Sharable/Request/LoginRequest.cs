@@ -4,5 +4,5 @@ using MediatR;
 namespace Ecommerce.Sharable.Requests;
 
 public record LoginRequest(
-    string username,
+    string email,
     string password) : IRequest<Result<KeycloakResponse>>;

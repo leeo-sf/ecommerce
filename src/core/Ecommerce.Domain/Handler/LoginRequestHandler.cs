@@ -15,7 +15,7 @@ public class LoginRequestHandler : IRequestHandler<LoginRequest, Result<Keycloak
 
     public async Task<Result<KeycloakResponse>> Handle(LoginRequest request, CancellationToken cancellationToken)
     {
-        var response = await _keycloakApiService.ObterTokenAsync(request.username, request.password);
+        var response = await _keycloakApiService.ObterTokenUsuarioAsync(request.email, request.password);
         return response;
     }
 }
