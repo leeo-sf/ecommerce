@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Ecommerce.Sharable.Config;
+using Ecommerce.Sharable.Request;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace Ecommerce.Infra.Ioc.Config;
 
@@ -21,6 +24,12 @@ public static class SwaggerConfiguration
                     Scheme = "Bearer"
                 }
             );
+
+            opt.CustomSchemaIds(type =>
+            {
+                var attr = type.GetCustomAttribute<SwaggerSchemaName>();
+                return attr?.Name ?? type.Name;
+            });
 
             opt.AddSecurityRequirement(
                 new OpenApiSecurityRequirement

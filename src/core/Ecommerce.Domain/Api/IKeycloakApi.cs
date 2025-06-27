@@ -8,5 +8,6 @@ public interface IKeycloakApi
 {
     [Post("/realms/ecommerce_services/protocol/openid-connect/token")]
     Task<ApiResponse<KeycloakResponse>> ObterTokenAsync(
-        [Body(BodySerializationMethod.UrlEncoded)] KeycloakRequest request);
+        [Body(BodySerializationMethod.UrlEncoded)] KeycloakRequest request
+    );
 }
