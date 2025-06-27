@@ -3,7 +3,7 @@ using Ecommerce.Sharable.DTOs;
 using Ecommerce.Sharable.Requests;
 using Ecommerce.Sharable.Responses;
 
-namespace Ecommerce.Domain.Interfaces;
+namespace Ecommerce.Application.Interfaces;
 
 public interface IKeycloakApiService
 {

@@ -1,7 +1,4 @@
-﻿using Ecommerce.Sharable.DTOs;
-using System.Text.Json;
-
-namespace Ecommerce.Sharable.Exceptions;
+﻿namespace Ecommerce.Sharable.Exceptions;
 
 public class KeycloakException : Exception
 {

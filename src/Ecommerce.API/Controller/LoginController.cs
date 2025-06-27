@@ -1,11 +1,11 @@
-﻿using Asp.Versioning;
+﻿using System.ComponentModel.DataAnnotations;
+using Asp.Versioning;
 using Ecommerce.API.Controller.Base;
 using Ecommerce.Sharable.Requests;
 using Ecommerce.Sharable.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace Ecommerce.API.Controller;
 
@@ -20,7 +20,6 @@ public class LoginController : BaseApiController
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<ActionResult<KeycloakResponse>> Login(
-        [Required] LoginRequest request)
-        => await SendCommand(request);
+    public async Task<ActionResult<KeycloakResponse>> Login([Required] LoginRequest request) =>
+        await SendCommand(request);
 }

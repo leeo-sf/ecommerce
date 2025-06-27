@@ -13,7 +13,10 @@ namespace Ecommerce.API.Controller.Base
 
         public BaseApiController(IMediator mediator) => _mediator = mediator;
 
-        protected async Task<ActionResult<T>> SendCommand<T>(IRequest<Result<T>> request, int statusCode = 200)
+        protected async Task<ActionResult<T>> SendCommand<T>(
+            IRequest<Result<T>> request,
+            int statusCode = 200
+        )
         {
             var response = await _mediator.Send(request);
             return response.IsSuccess
@@ -21,19 +24,25 @@ namespace Ecommerce.API.Controller.Base
                 : HandleError(response.Exception);
         }
 
-        protected async Task<ActionResult> SendCommand(IRequest<Result> request, int statusCode = 200)
+        protected async Task<ActionResult> SendCommand(
+            IRequest<Result> request,
+            int statusCode = 200
+        )
         {
             var response = await _mediator.Send(request);
-            return response.IsSuccess
-                ? StatusCode(statusCode)
-                : HandleError(response.Exception);
+            return response.IsSuccess ? StatusCode(statusCode) : HandleError(response.Exception);
         }
 
-        protected ActionResult HandleError(Exception error) => error switch
-        {
-            KeycloakException => StatusCode(StatusCodes.Status401Unauthorized, new { error.Message }),
-            ApplicationException => StatusCode(StatusCodes.Status422UnprocessableEntity, new { error.Message }),
-            _ => StatusCode(500)
-        };
+        protected ActionResult HandleError(Exception error) =>
+            error switch
+            {
+                KeycloakException
+                    => StatusCode(StatusCodes.Status401Unauthorized, new { error.Message }),
+                ApplicationException
+                    => StatusCode(StatusCodes.Status422UnprocessableEntity, new { error.Message }),
+                CategoryException
+                    => StatusCode(StatusCodes.Status422UnprocessableEntity, new { error.Message }),
+                _ => StatusCode(500)
+            };
     }
 }
