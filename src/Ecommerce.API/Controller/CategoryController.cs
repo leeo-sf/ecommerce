@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 using Asp.Versioning;
 using Ecommerce.API.Controller.Base;
 using Ecommerce.Sharable.Request;
@@ -7,7 +6,6 @@ using Ecommerce.Sharable.VO;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Refit;
 
 namespace Ecommerce.API.Controller;
 
@@ -22,7 +20,7 @@ public class CategoryController : BaseApiController
 
     [HttpPost]
     public async Task<ActionResult> Create(
-        [Required] [FromBody] CategoryRequest request) =>
+        [Required, FromBody] CategoryRequest request) =>
         await SendCommand(request, 201);
 
     [HttpGet]
@@ -30,14 +28,14 @@ public class CategoryController : BaseApiController
     public async Task<ActionResult<ICollection<CategoryVO>>> List() =>
         await SendCommand(new QueryCategoriesRequest());
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     [AllowAnonymous]
     public async Task<ActionResult<CategoryVO>> GetById(
-        [Required] GetCategoryByIdRequest request) =>
-        await SendCommand(request);
+        [Required, FromRoute] GetCategoryByIdRequest id) =>
+        await SendCommand(id);
 
-    [HttpDelete]
+    [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Delete(
-        [Required] DeleteCategoryRequest request) =>
-        await SendCommand(request);
+        [Required, FromRoute] DeleteCategoryRequest id) =>
+        await SendCommand(id);
 }

@@ -1,21 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ecommerce.Domain.Entity.Base;
 
-public class BaseEntity
+public record BaseEntity(
+    [property: NotMapped] Guid id,
+    [property: NotMapped] DateTime createdIn,
+    [property: NotMapped] DateTime updatedIn)
 {
-    [Key]
-    [Column("id")]
-    public Guid Id { get; protected set; }
-
-    protected BaseEntity()
-    {
-        Id = Guid.NewGuid();
-    }
-
-    public BaseEntity(Guid id)
-    {
-        Id = id;
-    }
+    public Guid Id { get; private set; } = id;
+    public DateTime CreatedIn { get; private set; } = createdIn;
+    public DateTime UpdatedIn { get; protected set; } = updatedIn;
 }

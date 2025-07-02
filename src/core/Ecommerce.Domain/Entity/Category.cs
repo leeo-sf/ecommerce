@@ -1,18 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Ecommerce.Domain.Entity.Base;
+﻿using Ecommerce.Domain.Entity.Base;
+using Ecommerce.Sharable.Request;
 
 namespace Ecommerce.Domain.Entity;
 
-[Table("category_table")]
-public sealed class Category : BaseEntity
+public record Category
+    (Guid Id, DateTime CreatedIn, DateTime UpdatedIn, string Name) : BaseEntity(Id, CreatedIn, UpdatedIn)
 {
-    public string Name { get; private set; }
+    public ICollection<Product> Products { get; } = default!;
 
-    public Category(string name)
-    {
-        Name = name;
-    }
-
-    public Category(Guid id, string name)
-        : base(id) { }
+    internal Category(CategoryRequest request)
+        : this(Guid.NewGuid(), DateTime.Now, DateTime.Now, request.Name) { }
 }

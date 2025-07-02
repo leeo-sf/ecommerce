@@ -5,27 +5,22 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8CA557BB-CC5A-483C-B834-96EAF98CFE6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.API", "src\Ecommerce.API\Ecommerce.API.csproj", "{18C9CCAF-E940-4F58-86C1-FCD3DE32FA47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.API", "src\Ecommerce.API\Ecommerce.API.csproj", "{18C9CCAF-E940-4F58-86C1-FCD3DE32FA47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{9A8FD984-42FE-4C0D-8F16-6035F781A178}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Domain", "src\core\Ecommerce.Domain\Ecommerce.Domain.csproj", "{BD9B0010-108B-4442-A191-372BDA64EF86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Domain", "src\core\Ecommerce.Domain\Ecommerce.Domain.csproj", "{BD9B0010-108B-4442-A191-372BDA64EF86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Application", "src\core\Ecommerce.Application\Ecommerce.Application.csproj", "{90160A08-DC96-4121-BD86-ED29D19F5065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Data", "src\core\Ecommerce.Data\Ecommerce.Data.csproj", "{A5416BFD-B224-4148-9944-31A7A0F2C9CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Infra.Data", "src\core\Ecommerce.Infra.Data\Ecommerce.Infra.Data.csproj", "{A5416BFD-B224-4148-9944-31A7A0F2C9CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Ioc", "src\core\Ecommerce.Ioc\Ecommerce.Ioc.csproj", "{2D53646E-D6FB-425E-8076-CA69C0F6E4A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Infra.Ioc", "src\core\Ecommerce.Infra.Ioc\Ecommerce.Infra.Ioc.csproj", "{2D53646E-D6FB-425E-8076-CA69C0F6E4A3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Sharable", "src\core\Ecommerce.Sharable\Ecommerce.Sharable.csproj", "{D7AC2AEC-AD6B-4059-8BE6-E12987D2B327}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Sharable", "src\core\Ecommerce.Sharable\Ecommerce.Sharable.csproj", "{D7AC2AEC-AD6B-4059-8BE6-E12987D2B327}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{18C9CCAF-E940-4F58-86C1-FCD3DE32FA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,10 +31,6 @@ Global
 		{BD9B0010-108B-4442-A191-372BDA64EF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD9B0010-108B-4442-A191-372BDA64EF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD9B0010-108B-4442-A191-372BDA64EF86}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90160A08-DC96-4121-BD86-ED29D19F5065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90160A08-DC96-4121-BD86-ED29D19F5065}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90160A08-DC96-4121-BD86-ED29D19F5065}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90160A08-DC96-4121-BD86-ED29D19F5065}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5416BFD-B224-4148-9944-31A7A0F2C9CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5416BFD-B224-4148-9944-31A7A0F2C9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5416BFD-B224-4148-9944-31A7A0F2C9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,11 +44,13 @@ Global
 		{D7AC2AEC-AD6B-4059-8BE6-E12987D2B327}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7AC2AEC-AD6B-4059-8BE6-E12987D2B327}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{18C9CCAF-E940-4F58-86C1-FCD3DE32FA47} = {8CA557BB-CC5A-483C-B834-96EAF98CFE6C}
 		{9A8FD984-42FE-4C0D-8F16-6035F781A178} = {8CA557BB-CC5A-483C-B834-96EAF98CFE6C}
 		{BD9B0010-108B-4442-A191-372BDA64EF86} = {9A8FD984-42FE-4C0D-8F16-6035F781A178}
-		{90160A08-DC96-4121-BD86-ED29D19F5065} = {9A8FD984-42FE-4C0D-8F16-6035F781A178}
 		{A5416BFD-B224-4148-9944-31A7A0F2C9CA} = {9A8FD984-42FE-4C0D-8F16-6035F781A178}
 		{2D53646E-D6FB-425E-8076-CA69C0F6E4A3} = {9A8FD984-42FE-4C0D-8F16-6035F781A178}
 		{D7AC2AEC-AD6B-4059-8BE6-E12987D2B327} = {9A8FD984-42FE-4C0D-8F16-6035F781A178}

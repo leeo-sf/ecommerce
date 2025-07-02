@@ -2,10 +2,9 @@
 
 namespace Ecommerce.Domain.Entity;
 
-public record Supplier
-    (Guid Id, DateTime CreatedIn, DateTime UpdatedIn, string Name, string Cnpj, bool IsActive)
+public record Coupon
+    (Guid Id, DateTime CreatedIn, DateTime UpdatedIn, string Code, int DiscountPercentage, DateTime? ValidUntil) 
         : BaseEntity(Id, CreatedIn, UpdatedIn)
 {
-    public ICollection<Address> Addresses { get; } = default!;
     public ICollection<Product> Products { get; } = default!;
 }

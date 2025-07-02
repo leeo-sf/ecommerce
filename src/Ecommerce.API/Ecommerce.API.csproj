@@ -12,11 +12,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NPOI" Version="2.7.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\core\Ecommerce.Infra.Ioc\Ecommerce.Infra.Ioc.csproj" />
+    <ProjectReference Include="..\core\Ecommerce.Ioc\Ecommerce.Ioc.csproj" />
   </ItemGroup>
 
 </Project>
