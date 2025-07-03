@@ -8,6 +8,6 @@ public record BaseEntity(
     [property: NotMapped] DateTime updatedIn)
 {
     public Guid Id { get; private set; } = id;
-    public DateTime CreatedIn { get; private set; } = createdIn;
-    public DateTime UpdatedIn { get; protected set; } = updatedIn;
+    public DateTime CreatedIn { get; private set; } = createdIn.ToUniversalTime();
+    public DateTime UpdatedIn { get; protected set; } = updatedIn.ToUniversalTime();
 }

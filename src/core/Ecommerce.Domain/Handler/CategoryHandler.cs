@@ -25,31 +25,31 @@ public class CategoryHandler
 
     public async Task<Result> Handle(CategoryRequest request, CancellationToken cancellationToken)
     {
-        var categoryExists = await _categoryRepo.CategoryExistsAsync(request.Name);
+        var categoryExists = await _categoryRepo.CategoryExistsAsync(request.Name, cancellationToken);
         if (categoryExists)
             return new(new CategoryException($"Categoria {request.Name} já existe!"));
-        await _categoryRepo.CreateAsync(new(request));
+        await _categoryRepo.CreateAsync(new(request), cancellationToken);
         return new(true);
     }
 
     public async Task<Result<ICollection<CategoryVO>>> Handle(QueryCategoriesRequest request, CancellationToken cancellationToken)
     {
-        var categories = await _categoryRepo.GetAllCategoriesAsync();
+        var categories = await _categoryRepo.GetAllCategoriesAsync(cancellationToken);
         return new(_mapper.Map<ICollection<CategoryVO>>(categories));
     }
 
     public async Task<Result> Handle(DeleteCategoryRequest request, CancellationToken cancellationToken)
     {
-        var category = await _categoryRepo.GetCategoryByIdAsync(request.id);
+        var category = await _categoryRepo.GetCategoryByIdAsync(request.id, cancellationToken);
         if (category is null)
             return new(new CategoryException("Categoria não encontrada!"));
-        await _categoryRepo.DeleteAsync(category);
+        await _categoryRepo.DeleteAsync(category, cancellationToken);
         return new(true);
     }
 
     public async Task<Result<CategoryVO>> Handle(GetCategoryByIdRequest request, CancellationToken cancellationToken)
     {
-        var category = await _categoryRepo.GetCategoryByIdAsync(request.id);
+        var category = await _categoryRepo.GetCategoryByIdAsync(request.id, cancellationToken);
         if (category is null)
             return new(new CategoryException("Categoria não encontrada!"));
         return new(_mapper.Map<CategoryVO>(category));

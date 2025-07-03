@@ -4,9 +4,9 @@ namespace Ecommerce.Domain.Interface;
 
 public interface ICategoryRepository
 {
-    Task CreateAsync(Category category);
-    Task<bool> CategoryExistsAsync(string name);
-    Task<ICollection<Category>> GetAllCategoriesAsync();
-    Task<Category?> GetCategoryByIdAsync(Guid id);
-    Task DeleteAsync(Category category);
+    Task CreateAsync(Category category, CancellationToken cancelationToken);
+    Task<bool> CategoryExistsAsync(string name, CancellationToken cancelationToken);
+    Task<ICollection<Category>> GetAllCategoriesAsync(CancellationToken cancelationToken);
+    Task<Category?> GetCategoryByIdAsync(Guid id, CancellationToken cancelationToken);
+    Task DeleteAsync(Category category, CancellationToken cancelationToken);
 }

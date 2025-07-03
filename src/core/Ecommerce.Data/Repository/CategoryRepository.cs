@@ -10,26 +10,26 @@ public class CategoryRepository : ICategoryRepository
 
     public CategoryRepository(AppDbContext appDbContext) => _appDbContext = appDbContext;
 
-    public async Task<bool> CategoryExistsAsync(string name) =>
-        await _appDbContext.Category.AnyAsync(c => c.Name == name);
+    public async Task<bool> CategoryExistsAsync(string name, CancellationToken cancelationToken) =>
+        await _appDbContext.Category.AnyAsync(c => c.Name == name, cancelationToken);
 
-    public async Task CreateAsync(Category category)
+    public async Task CreateAsync(Category category, CancellationToken cancelationToken)
     {
         _appDbContext.Category.Add(category);
-        await _appDbContext.SaveChangesAsync();
+        await _appDbContext.SaveChangesAsync(cancelationToken);
     }
 
-    public async Task<ICollection<Category>> GetAllCategoriesAsync() =>
-        await _appDbContext.Category.ToListAsync();
+    public async Task<ICollection<Category>> GetAllCategoriesAsync(CancellationToken cancelationToken) =>
+        await _appDbContext.Category.ToListAsync(cancelationToken);
 
-    public async Task DeleteAsync(Category category)
+    public async Task DeleteAsync(Category category, CancellationToken cancelationToken)
     {
         _appDbContext.Category.Remove(category);
-        await _appDbContext.SaveChangesAsync();
+        await _appDbContext.SaveChangesAsync(cancelationToken);
     }
 
-    public async Task<Category?> GetCategoryByIdAsync(Guid id)
+    public async Task<Category?> GetCategoryByIdAsync(Guid id, CancellationToken cancelationToken)
         => await _appDbContext.Category
             .Where(c => c.Id == id)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancelationToken);
 }
