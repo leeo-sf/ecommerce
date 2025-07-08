@@ -9,5 +9,5 @@ public record BaseEntity(
 {
     public Guid Id { get; private set; } = id;
     public DateTime CreatedIn { get; private set; } = createdIn.ToUniversalTime();
-    public DateTime UpdatedIn { get; protected set; } = updatedIn.ToUniversalTime();
+    public DateTime UpdatedIn { get; internal set; } = updatedIn.ToUniversalTime();
 }

@@ -58,6 +58,7 @@ public static class AppDependenciesConfiguration
     {
         services.AddSingleton<IKeycloakApiService, KeycloakApiService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ICouponRepository, CouponRepository>();
     }
 
     private static void ConfigureDbContext(

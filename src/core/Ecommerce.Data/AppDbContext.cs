@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public DbSet<Supplier> Supplier { get; set; } = default!;
     public DbSet<Category> Category { get; set; } = default!;
     public DbSet<Product> Product { get; set; } = default!;
+    public DbSet<Coupon> Coupon { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

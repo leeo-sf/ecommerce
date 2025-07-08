@@ -31,11 +31,11 @@ public class CategoryController : BaseApiController
     [HttpGet("{id:guid}")]
     [AllowAnonymous]
     public async Task<ActionResult<CategoryVO>> GetById(
-        [Required, FromRoute] GetCategoryByIdRequest id) =>
-        await SendCommand(id);
+        [Required, FromRoute] Guid id) =>
+        await SendCommand(new GetCategoryByIdRequest(id));
 
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Delete(
-        [Required, FromRoute] DeleteCategoryRequest id) =>
-        await SendCommand(id);
+        [Required, FromRoute] Guid id) =>
+        await SendCommand(new DeleteCategoryRequest(id));
 }

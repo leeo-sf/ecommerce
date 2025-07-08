@@ -27,7 +27,7 @@ public class CategoryHandler
     {
         var categoryExists = await _categoryRepo.CategoryExistsAsync(request.Name, cancellationToken);
         if (categoryExists)
-            return new(new CategoryException($"Categoria {request.Name} já existe!"));
+            return new(new AppException($"Categoria {request.Name} já existe!"));
         await _categoryRepo.CreateAsync(new(request), cancellationToken);
         return new(true);
     }
@@ -42,7 +42,7 @@ public class CategoryHandler
     {
         var category = await _categoryRepo.GetCategoryByIdAsync(request.id, cancellationToken);
         if (category is null)
-            return new(new CategoryException("Categoria não encontrada!"));
+            return new(new KeyNotFoundException("Categoria não encontrada!"));
         await _categoryRepo.DeleteAsync(category, cancellationToken);
         return new(true);
     }
@@ -51,7 +51,7 @@ public class CategoryHandler
     {
         var category = await _categoryRepo.GetCategoryByIdAsync(request.id, cancellationToken);
         if (category is null)
-            return new(new CategoryException("Categoria não encontrada!"));
+            return new(new KeyNotFoundException("Categoria não encontrada!"));
         return new(_mapper.Map<CategoryVO>(category));
     }
 }

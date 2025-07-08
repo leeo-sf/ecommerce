@@ -40,8 +40,10 @@ namespace Ecommerce.API.Controller.Base
                     => StatusCode(StatusCodes.Status401Unauthorized, new { error.Message }),
                 ApplicationException
                     => StatusCode(StatusCodes.Status422UnprocessableEntity, new { error.Message }),
-                CategoryException
+                AppException
                     => StatusCode(StatusCodes.Status422UnprocessableEntity, new { error.Message }),
+                KeyNotFoundException
+                    => StatusCode(StatusCodes.Status404NotFound, new { error.Message }),
                 _ => StatusCode(500)
             };
     }
