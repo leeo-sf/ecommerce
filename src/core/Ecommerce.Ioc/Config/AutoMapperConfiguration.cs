@@ -13,13 +13,16 @@ public static class AutoMapperConfiguration
         {
             config.CreateMap<Category, CategoryVO>();
             config.CreateMap<Coupon, CouponVO>()
-                .ForMember(c => c.ValidUntil,
-                map => map.MapFrom(x => x.ValidUntil.HasValue ? x.ValidUntil.Value.ToString() : null))
                 .ForAllMembers(opts =>
                 {
                     opts.Condition((src, dest, srcMember) => srcMember != null);
                 });
             config.CreateMap<UpdateCouponRequest, Coupon>();
+            config.CreateMap<DateTime?, DateOnly?>()
+                .ConvertUsing(src => 
+                    src.HasValue
+                        ? DateOnly.FromDateTime(src.Value)
+                        : null);
         });
     }
 }
