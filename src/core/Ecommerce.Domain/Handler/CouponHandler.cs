@@ -2,7 +2,7 @@
 using Ecommerce.Domain.Interface;
 using Ecommerce.Sharable;
 using Ecommerce.Sharable.Exceptions;
-using Ecommerce.Sharable.Request;
+using Ecommerce.Sharable.Request.Coupon;
 using Ecommerce.Sharable.VO;
 using MediatR;
 

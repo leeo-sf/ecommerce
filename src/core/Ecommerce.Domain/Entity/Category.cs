@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Domain.Entity.Base;
-using Ecommerce.Sharable.Request;
+using Ecommerce.Sharable.Request.Category;
 
 namespace Ecommerce.Domain.Entity;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Ecommerce.Domain.Entity;
-using Ecommerce.Sharable.Request;
+using Ecommerce.Sharable.Request.Coupon;
 using Ecommerce.Sharable.VO;
 
 namespace Ecommerce.Infra.Ioc.Config;

@@ -2,7 +2,7 @@
 using Ecommerce.Sharable.VO;
 using MediatR;
 
-namespace Ecommerce.Sharable.Request;
+namespace Ecommerce.Sharable.Request.Coupon;
 
 [SwaggerSchemaName("CupomPorId")]
 public record GetCouponByIdRequest(Guid Id) : IRequest<Result<CouponVO>>;
