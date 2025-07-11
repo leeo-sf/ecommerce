@@ -1,10 +1,10 @@
 ﻿using Ecommerce.Sharable.Request.Address;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 
 namespace Ecommerce.Sharable.Request.Supplier;
 
-public record CreateSupplierRequest : IRequest<Result<SupplierVO>>
+public record CreateSupplierRequest : IRequest<Result<SupplierDto>>
 {
     public string Name { get; init; }
     public string Cnpj { get; init; }

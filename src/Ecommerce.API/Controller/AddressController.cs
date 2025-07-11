@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using Ecommerce.API.Controller.Base;
 using Ecommerce.Sharable.Request.Address;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +17,7 @@ public class AddressController : BaseApiController
         : base(mediator) { }
 
     [HttpPost]
-    public async Task<ActionResult<AddressVO>> CreateAddressAsync(
+    public async Task<ActionResult<AddressDto>> CreateAddressAsync(
         [Required, FromBody] CreateAddressRequest request)
             => await SendCommand(request, 201);
 

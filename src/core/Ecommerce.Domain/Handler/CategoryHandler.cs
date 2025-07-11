@@ -3,16 +3,16 @@ using Ecommerce.Domain.Interface;
 using Ecommerce.Sharable;
 using Ecommerce.Sharable.Exceptions;
 using Ecommerce.Sharable.Request.Category;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 
 namespace Ecommerce.Domain.Handler;
 
 public class CategoryHandler
     : IRequestHandler<CategoryRequest, Result>,
-        IRequestHandler<QueryCategoriesRequest, Result<ICollection<CategoryVO>>>,
+        IRequestHandler<QueryCategoriesRequest, Result<ICollection<CategoryDto>>>,
         IRequestHandler<DeleteCategoryRequest, Result>,
-        IRequestHandler<GetCategoryByIdRequest, Result<CategoryVO>>
+        IRequestHandler<GetCategoryByIdRequest, Result<CategoryDto>>
 {
     private readonly ICategoryRepository _categoryRepo;
     private readonly IMapper _mapper;
@@ -32,10 +32,10 @@ public class CategoryHandler
         return new(true);
     }
 
-    public async Task<Result<ICollection<CategoryVO>>> Handle(QueryCategoriesRequest request, CancellationToken cancellationToken)
+    public async Task<Result<ICollection<CategoryDto>>> Handle(QueryCategoriesRequest request, CancellationToken cancellationToken)
     {
         var categories = await _categoryRepo.GetAllCategoriesAsync(cancellationToken);
-        return new(_mapper.Map<ICollection<CategoryVO>>(categories));
+        return new(_mapper.Map<ICollection<CategoryDto>>(categories));
     }
 
     public async Task<Result> Handle(DeleteCategoryRequest request, CancellationToken cancellationToken)
@@ -47,11 +47,11 @@ public class CategoryHandler
         return new(true);
     }
 
-    public async Task<Result<CategoryVO>> Handle(GetCategoryByIdRequest request, CancellationToken cancellationToken)
+    public async Task<Result<CategoryDto>> Handle(GetCategoryByIdRequest request, CancellationToken cancellationToken)
     {
         var category = await _categoryRepo.GetCategoryByIdAsync(request.id, cancellationToken);
         if (category is null)
             return new(new KeyNotFoundException("Categoria não encontrada!"));
-        return new(_mapper.Map<CategoryVO>(category));
+        return new(_mapper.Map<CategoryDto>(category));
     }
 }

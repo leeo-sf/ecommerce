@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Ecommerce.Domain.Entity;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 
 namespace Ecommerce.Infra.Ioc.Config;
 
@@ -10,14 +10,14 @@ public static class AutoMapperConfiguration
     {
         return new MapperConfiguration(config =>
         {
-            config.CreateMap<Category, CategoryVO>();
-            config.CreateMap<Coupon, CouponVO>()
+            config.CreateMap<Category, CategoryDto>();
+            config.CreateMap<Coupon, CouponDto>()
                 .ForAllMembers(opts =>
                 {
                     opts.Condition((src, dest, srcMember) => srcMember != null);
                 });
-            config.CreateMap<Address, AddressVO>();
-            config.CreateMap<Supplier, SupplierVO>();
+            config.CreateMap<Address, AddressDto>();
+            config.CreateMap<Supplier, SupplierDto>();
 
             config.CreateMap<DateTime?, DateOnly?>().ConvertUsing(src => src.HasValue 
                 ? DateOnly.FromDateTime(src.Value)

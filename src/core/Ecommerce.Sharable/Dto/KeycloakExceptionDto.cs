@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Ecommerce.Sharable.DTOs;
+namespace Ecommerce.Sharable.Dto;
 
-public class KeycloakExceptionDTO
+public class KeycloakExceptionDto
 {
     [JsonPropertyName("error")]
     public string? Error { get; }
@@ -11,14 +11,14 @@ public class KeycloakExceptionDTO
     [JsonPropertyName("error_description")]
     public string? ErrorDescription { get; }
 
-    public KeycloakExceptionDTO(string error, string errorDescription)
+    public KeycloakExceptionDto(string error, string errorDescription)
     {
         Error = error;
         ErrorDescription = errorDescription;
     }
 
-    public static KeycloakExceptionDTO GetContentError(string contentKeycloakError)
+    public static KeycloakExceptionDto GetContentError(string contentKeycloakError)
     {
-        return JsonSerializer.Deserialize<KeycloakExceptionDTO>(contentKeycloakError)!;
+        return JsonSerializer.Deserialize<KeycloakExceptionDto>(contentKeycloakError)!;
     }
 }

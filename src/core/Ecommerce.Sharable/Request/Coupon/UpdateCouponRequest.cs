@@ -1,12 +1,12 @@
 ﻿using Ecommerce.Sharable.Config;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
 namespace Ecommerce.Sharable.Request.Coupon;
 
 [SwaggerSchemaName("AtualizarCupom")]
-public record UpdateCouponRequest : IRequest<Result<CouponVO>>
+public record UpdateCouponRequest : IRequest<Result<CouponDto>>
 {
     public Guid Id { get; init; }
     public string Code { get; init; }

@@ -3,17 +3,17 @@ using Ecommerce.Domain.Interface;
 using Ecommerce.Sharable;
 using Ecommerce.Sharable.Exceptions;
 using Ecommerce.Sharable.Request.Coupon;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 
 namespace Ecommerce.Domain.Handler;
 
 public sealed class CouponHandler
     : IRequestHandler<CreateCouponRequest, Result>,
-        IRequestHandler<GetCouponByIdRequest, Result<CouponVO>>,
+        IRequestHandler<GetCouponByIdRequest, Result<CouponDto>>,
         IRequestHandler<DeleteCouponRequest, Result>,
-        IRequestHandler<UpdateCouponRequest, Result<CouponVO>>,
-        IRequestHandler<GetAllCouponRequest, Result<ICollection<CouponVO>>>
+        IRequestHandler<UpdateCouponRequest, Result<CouponDto>>,
+        IRequestHandler<GetAllCouponRequest, Result<ICollection<CouponDto>>>
 {
     private readonly ICouponRepository _couponRepository;
     private readonly IMapper _mapper;
@@ -35,12 +35,12 @@ public sealed class CouponHandler
         return new(true);
     }
 
-    public async Task<Result<CouponVO>> Handle(GetCouponByIdRequest request, CancellationToken cancellationToken)
+    public async Task<Result<CouponDto>> Handle(GetCouponByIdRequest request, CancellationToken cancellationToken)
     {
         var coupon = await _couponRepository.CouponByIdAsync(request.Id, cancellationToken);
 
         return coupon is not null
-            ? _mapper.Map<CouponVO>(coupon)
+            ? _mapper.Map<CouponDto>(coupon)
             : new KeyNotFoundException("Cupom não encontrado!");
     }
 
@@ -53,16 +53,16 @@ public sealed class CouponHandler
         return new(true);
     }
 
-    public async Task<Result<CouponVO>> Handle(UpdateCouponRequest request, CancellationToken cancellationToken)
+    public async Task<Result<CouponDto>> Handle(UpdateCouponRequest request, CancellationToken cancellationToken)
     {
         var coupon = await _couponRepository.CouponByIdAsync(request.Id, cancellationToken);
         if (coupon is null)
             return new(new KeyNotFoundException("Cupom não encontrado!"));
         var updatedCoupon = await _couponRepository.UpdateCouponAsync(
             coupon with { UpdatedIn = DateTime.Now.ToUniversalTime(), Code = request.Code, DiscountPercentage = request.DiscountPercentage, ValidUntil = request.ValidUntil }, cancellationToken);
-        return new(_mapper.Map<CouponVO>(updatedCoupon));
+        return new(_mapper.Map<CouponDto>(updatedCoupon));
     }
 
-    public async Task<Result<ICollection<CouponVO>>> Handle(GetAllCouponRequest request, CancellationToken cancellationToken)
-        => _mapper.Map<List<CouponVO>>(await _couponRepository.GetAllCouponAsync());
+    public async Task<Result<ICollection<CouponDto>>> Handle(GetAllCouponRequest request, CancellationToken cancellationToken)
+        => _mapper.Map<List<CouponDto>>(await _couponRepository.GetAllCouponAsync());
 }

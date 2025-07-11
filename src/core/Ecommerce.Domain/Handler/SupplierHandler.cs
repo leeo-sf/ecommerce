@@ -4,15 +4,15 @@ using Ecommerce.Domain.Interface;
 using Ecommerce.Sharable;
 using Ecommerce.Sharable.Exceptions;
 using Ecommerce.Sharable.Request.Supplier;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 
 namespace Ecommerce.Domain.Handler;
 
 public class SupplierHandler
-    : IRequestHandler<CreateSupplierRequest, Result<SupplierVO>>,
+    : IRequestHandler<CreateSupplierRequest, Result<SupplierDto>>,
         IRequestHandler<UpdateSupplierRequest, Result>,
-        IRequestHandler<GetSuppliersRequest, Result<ICollection<SupplierVO>>>
+        IRequestHandler<GetSuppliersRequest, Result<ICollection<SupplierDto>>>
 {
     private readonly ISupplierRepository _supplierRepository;
     private readonly IAddressRepository _addressRepository;
@@ -29,7 +29,7 @@ public class SupplierHandler
         _mapper = mapper;
     }
 
-    public async Task<Result<SupplierVO>> Handle(CreateSupplierRequest request, CancellationToken cancellationToken)
+    public async Task<Result<SupplierDto>> Handle(CreateSupplierRequest request, CancellationToken cancellationToken)
     {
         var supplierAlreadyExists = await _supplierRepository.SupplierAlreadyExistsAsync(s => s.Cnpj == request.Cnpj, cancellationToken);
         if (supplierAlreadyExists)
@@ -44,7 +44,7 @@ public class SupplierHandler
         var supplier = await _supplierRepository.CreateSupplierAsync(
             new(supplierId, DateTime.Now, DateTime.Now, request.Name, request.Cnpj, request.IsActive)
             { Addresses = new List<Address> { new(Guid.NewGuid(), DateTime.Now, DateTime.Now, request.Address.ZipCode, request.Address.PublicPlace, request.Address.Neighborhood, request.Address.Number, request.Address.Uf, supplierId) } }, cancellationToken);
-        return _mapper.Map<SupplierVO>(supplier);
+        return _mapper.Map<SupplierDto>(supplier);
     }
 
     public async Task<Result> Handle(UpdateSupplierRequest request, CancellationToken cancellationToken)
@@ -63,7 +63,7 @@ public class SupplierHandler
         return new(true);
     }
 
-    public async Task<Result<ICollection<SupplierVO>>> Handle(GetSuppliersRequest request, CancellationToken cancellationToken)
-        => _mapper.Map<List<SupplierVO>>(
+    public async Task<Result<ICollection<SupplierDto>>> Handle(GetSuppliersRequest request, CancellationToken cancellationToken)
+        => _mapper.Map<List<SupplierDto>>(
             await _supplierRepository.GetSuppliersAsync(cancellationToken));
 }

@@ -1,10 +1,10 @@
 ﻿using Ecommerce.Sharable.Enum;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 
 namespace Ecommerce.Sharable.Request.Address;
 
-public record CreateAddressRequest : IRequest<Result<AddressVO>>
+public record CreateAddressRequest : IRequest<Result<AddressDto>>
 {
     public string ZipCode { get; }
     public string PublicPlace { get; }

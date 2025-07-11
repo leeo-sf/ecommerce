@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Asp.Versioning;
 using Ecommerce.API.Controller.Base;
-using Ecommerce.Sharable.Request;
 using Ecommerce.Sharable.Request.Category;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +24,12 @@ public class CategoryController : BaseApiController
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<ActionResult<ICollection<CategoryVO>>> List() =>
+    public async Task<ActionResult<ICollection<CategoryDto>>> List() =>
         await SendCommand(new QueryCategoriesRequest());
 
     [HttpGet("{id:guid}")]
     [AllowAnonymous]
-    public async Task<ActionResult<CategoryVO>> GetById(
+    public async Task<ActionResult<CategoryDto>> GetById(
         [Required, FromRoute] Guid id) =>
         await SendCommand(new GetCategoryByIdRequest(id));
 

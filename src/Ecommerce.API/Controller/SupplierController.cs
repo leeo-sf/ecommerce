@@ -1,8 +1,7 @@
 ﻿using Asp.Versioning;
 using Ecommerce.API.Controller.Base;
-using Ecommerce.Sharable.Request.Address;
 using Ecommerce.Sharable.Request.Supplier;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -18,11 +17,11 @@ public class SupplierController : BaseApiController
         : base(mediator) { }
 
     [HttpGet]
-    public async Task<ActionResult<ICollection<SupplierVO>>> GetSuppliersAsync()
+    public async Task<ActionResult<ICollection<SupplierDto>>> GetSuppliersAsync()
         => await SendCommand(new GetSuppliersRequest());
 
     [HttpPost]
-    public async Task<ActionResult<SupplierVO>> CreateSupplierAsync(
+    public async Task<ActionResult<SupplierDto>> CreateSupplierAsync(
         [Required, FromBody] CreateSupplierRequest request)
             => await SendCommand(request, 201);
 

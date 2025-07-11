@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using Ecommerce.API.Controller.Base;
 using Ecommerce.Sharable.Request.Coupon;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -22,21 +22,21 @@ public class CouponController : BaseApiController
         => await SendCommand(request, 201);
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<CouponVO>> GetCouponByIdAsync(
+    public async Task<ActionResult<CouponDto>> GetCouponByIdAsync(
         [Required, FromRoute] Guid id)
         => await SendCommand(new GetCouponByIdRequest(id));
 
     [HttpGet]
-    public async Task<ActionResult<ICollection<CouponVO>>> GetCouponByIdAsync()
+    public async Task<ActionResult<ICollection<CouponDto>>> GetCouponByIdAsync()
         => await SendCommand(new GetAllCouponRequest());
 
     [HttpDelete("delete/{id:guid}")]
-    public async Task<ActionResult<CouponVO>> DeleteCouponAsync(
+    public async Task<ActionResult<CouponDto>> DeleteCouponAsync(
         [Required, FromRoute] Guid id)
         => await SendCommand(new DeleteCouponRequest(id));
 
     [HttpPut("update")]
-    public async Task<ActionResult<CouponVO>> UpdateCouponAsync(
+    public async Task<ActionResult<CouponDto>> UpdateCouponAsync(
         [Required, FromBody] UpdateCouponRequest request)
         => await SendCommand(request);
 }

@@ -1,6 +1,4 @@
 ﻿using Ecommerce.Sharable;
-using Ecommerce.Sharable.DTOs;
-using Ecommerce.Sharable.Requests;
 using Ecommerce.Sharable.Responses;
 
 namespace Ecommerce.Domain.Interfaces;

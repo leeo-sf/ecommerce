@@ -3,13 +3,13 @@ using Ecommerce.Domain.Interface;
 using Ecommerce.Sharable;
 using Ecommerce.Sharable.Exceptions;
 using Ecommerce.Sharable.Request.Address;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 
 namespace Ecommerce.Domain.Handler;
 
 public class AddressHandler
-    : IRequestHandler<CreateAddressRequest, Result<AddressVO>>,
+    : IRequestHandler<CreateAddressRequest, Result<AddressDto>>,
         IRequestHandler<DeleteAddressRequest, Result>
 {
     private readonly IAddressRepository _addressRepository;
@@ -26,7 +26,7 @@ public class AddressHandler
         _mapper = mapper;
     }
 
-    public async Task<Result<AddressVO>> Handle(CreateAddressRequest request, CancellationToken cancellationToken)
+    public async Task<Result<AddressDto>> Handle(CreateAddressRequest request, CancellationToken cancellationToken)
     {
         var addressExists = await _addressRepository.AddressAlreadyExistsAsync
             (request.ZipCode, request.PublicPlace, request.Number, request.Uf, cancellationToken);
@@ -39,7 +39,7 @@ public class AddressHandler
 
         var address = await _addressRepository.CreateAddressAsync(
             new(Guid.NewGuid(), DateTime.Now, DateTime.Now, request.ZipCode, request.PublicPlace, request.Neighborhood, request.Number, request.Uf, supplier.id), cancellationToken);
-        return _mapper.Map<AddressVO>(address);
+        return _mapper.Map<AddressDto>(address);
     }
 
     public async Task<Result> Handle(DeleteAddressRequest request, CancellationToken cancellationToken)

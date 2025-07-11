@@ -1,8 +1,8 @@
 ﻿using Ecommerce.Sharable.Config;
-using Ecommerce.Sharable.VO;
+using Ecommerce.Sharable.Dto;
 using MediatR;
 
 namespace Ecommerce.Sharable.Request.Coupon;
 
 [SwaggerSchemaName("TodosCupom")]
-public record GetAllCouponRequest() : IRequest<Result<ICollection<CouponVO>>>;
+public record GetAllCouponRequest() : IRequest<Result<ICollection<CouponDto>>>;
