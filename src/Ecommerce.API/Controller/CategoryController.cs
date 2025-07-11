@@ -13,7 +13,6 @@ namespace Ecommerce.API.Controller;
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
 [ApiController]
-[ControllerName("categoria")]
 public class CategoryController : BaseApiController
 {
     public CategoryController(IMediator mediator)
@@ -35,7 +34,7 @@ public class CategoryController : BaseApiController
         [Required, FromRoute] Guid id) =>
         await SendCommand(new GetCategoryByIdRequest(id));
 
-    [HttpDelete("{id:guid}")]
+    [HttpDelete("delete/{id:guid}")]
     public async Task<ActionResult> Delete(
         [Required, FromRoute] Guid id) =>
         await SendCommand(new DeleteCategoryRequest(id));

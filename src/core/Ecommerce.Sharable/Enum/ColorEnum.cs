@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.Domain.Enum;
+﻿namespace Ecommerce.Sharable.Enum;
 
 public enum ColorEnum
 {

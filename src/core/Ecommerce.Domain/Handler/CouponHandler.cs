@@ -58,7 +58,8 @@ public sealed class CouponHandler
         var coupon = await _couponRepository.CouponByIdAsync(request.Id, cancellationToken);
         if (coupon is null)
             return new(new KeyNotFoundException("Cupom não encontrado!"));
-        var updatedCoupon = await _couponRepository.UpdateCouponAsync(_mapper.Map(request, coupon), cancellationToken);
+        var updatedCoupon = await _couponRepository.UpdateCouponAsync(
+            coupon with { UpdatedIn = DateTime.Now.ToUniversalTime(), Code = request.Code, DiscountPercentage = request.DiscountPercentage, ValidUntil = request.ValidUntil }, cancellationToken);
         return new(_mapper.Map<CouponVO>(updatedCoupon));
     }
 

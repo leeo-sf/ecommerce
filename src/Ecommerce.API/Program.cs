@@ -6,7 +6,7 @@ var configuration = builder.Configuration;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAuthenticationSwagger();
 
-builder.Services.AddControllers();
+builder.Services.AddConfigControllers();
 
 builder.Services.AddVersioning();
 

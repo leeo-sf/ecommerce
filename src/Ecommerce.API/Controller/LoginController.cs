@@ -11,7 +11,6 @@ namespace Ecommerce.API.Controller;
 
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-[ControllerName("login")]
 [ApiVersion("1.0")]
 public class LoginController : BaseApiController
 {

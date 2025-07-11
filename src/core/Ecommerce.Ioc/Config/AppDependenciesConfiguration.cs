@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using Ecommerce.Domain.Contracts.Apis;
 using Ecommerce.Domain.Contracts.Service;
+using Ecommerce.Ioc.Config;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Ecommerce.Infra.Ioc.Config;
 
@@ -37,6 +39,10 @@ public static class AppDependenciesConfiguration
         ConfigureDbContext(services, configuration);
     }
 
+    public static void AddConfigControllers(this IServiceCollection services)
+        => services.AddControllers(opt =>
+            opt.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer())));
+
     private static void ConfigureRefitClient<T>(this IServiceCollection services, string host)
         where T : class =>
         services
@@ -59,6 +65,8 @@ public static class AppDependenciesConfiguration
         services.AddSingleton<IKeycloakApiService, KeycloakApiService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ICouponRepository, CouponRepository>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<ISupplierRepository, SupplierRepository>();
     }
 
     private static void ConfigureDbContext(

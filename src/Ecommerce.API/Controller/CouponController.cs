@@ -11,7 +11,6 @@ namespace Ecommerce.API.Controller;
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
 [ApiController]
-[ControllerName("cupom")]
 public class CouponController : BaseApiController
 {
     public CouponController(IMediator mediator)
@@ -31,12 +30,12 @@ public class CouponController : BaseApiController
     public async Task<ActionResult<ICollection<CouponVO>>> GetCouponByIdAsync()
         => await SendCommand(new GetAllCouponRequest());
 
-    [HttpDelete("{id:guid}")]
+    [HttpDelete("delete/{id:guid}")]
     public async Task<ActionResult<CouponVO>> DeleteCouponAsync(
         [Required, FromRoute] Guid id)
         => await SendCommand(new DeleteCouponRequest(id));
 
-    [HttpPut("atualizar")]
+    [HttpPut("update")]
     public async Task<ActionResult<CouponVO>> UpdateCouponAsync(
         [Required, FromBody] UpdateCouponRequest request)
         => await SendCommand(request);

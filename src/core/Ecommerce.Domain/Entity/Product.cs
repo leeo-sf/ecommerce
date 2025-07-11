@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Domain.Entity.Base;
-using Ecommerce.Domain.Enum;
+using Ecommerce.Sharable.Enum;
 
 namespace Ecommerce.Domain.Entity;
 

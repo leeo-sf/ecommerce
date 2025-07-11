@@ -3,6 +3,7 @@ using System;
 using Ecommerce.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecommerce.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250709011012_AddNumberInAddress")]
+    partial class AddNumberInAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,11 +54,6 @@ namespace Ecommerce.Data.Migrations
                         .HasColumnName("public_place")
                         .HasComment("Logradouro");
 
-                    b.Property<Guid>("SupplierId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("supplier_id")
-                        .HasComment("Fornecedor");
-
                     b.Property<string>("Uf")
                         .IsRequired()
                         .HasColumnType("text")
@@ -73,11 +71,18 @@ namespace Ecommerce.Data.Migrations
                         .HasColumnName("zip_code")
                         .HasComment("CEP");
 
+                    b.Property<Guid>("id")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SupplierId");
+                    b.HasIndex("id");
 
-                    b.ToTable("address", (string)null);
+                    b.ToTable("address", null, t =>
+                        {
+                            t.Property("id")
+                                .HasColumnName("id1");
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entity.Category", b =>
@@ -328,21 +333,18 @@ namespace Ecommerce.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Cnpj")
-                        .IsUnique();
+                    b.HasIndex("Cnpj");
 
                     b.ToTable("supplier", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entity.Address", b =>
                 {
-                    b.HasOne("Ecommerce.Domain.Entity.Supplier", "Supplier")
+                    b.HasOne("Ecommerce.Domain.Entity.Supplier", null)
                         .WithMany("Addresses")
-                        .HasForeignKey("SupplierId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entity.Product", b =>
