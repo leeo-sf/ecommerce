@@ -67,6 +67,8 @@ public static class AppDependenciesConfiguration
         services.AddScoped<ICouponRepository, CouponRepository>();
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<ISupplierRepository, SupplierRepository>();
+        services.AddScoped<IPromotionRepository, PromotionRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
     }
 
     private static void ConfigureDbContext(

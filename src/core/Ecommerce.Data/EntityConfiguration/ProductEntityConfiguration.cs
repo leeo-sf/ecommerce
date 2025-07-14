@@ -23,7 +23,7 @@ internal class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(c => c.CouponId).HasColumnName("coupon_id").HasComment("Identificador do Cupom");
         builder.HasOne(c => c.Supplier).WithMany(c => c.Products).HasForeignKey(c => c.SupplierId).OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(c => c.Category).WithMany(c => c.Products).HasForeignKey(c => c.CategoryId).OnDelete(DeleteBehavior.Cascade);
-        builder.HasOne(c => c.Promotion).WithMany(c => c.Products).HasForeignKey(c => c.PromotionId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(c => c.Promotion).WithOne(c => c.Product).HasForeignKey<Promotion>(c => c.ProductId).OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(c => c.Coupon).WithMany(c => c.Products).HasForeignKey(c => c.CouponId).OnDelete(DeleteBehavior.Cascade);
     }
 }

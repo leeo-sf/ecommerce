@@ -3,9 +3,16 @@
 namespace Ecommerce.Domain.Entity;
 
 public record Promotion
-    (Guid Id, DateTime CreatedIn, DateTime UpdatedIn, bool IsPromotion, float? OriginalValue, int? DiscountPercentage, DateTime? ValidUntil)
+    (Guid Id, DateTime CreatedIn, DateTime UpdatedIn, bool IsPromotion, int DiscountPercentage, DateTime? PromotionStartsIn, DateTime? ValidUntil, Guid ProductId)
         : BaseEntity(Id, CreatedIn, UpdatedIn)
 {
-    public float? DiscountAmount { get; private set; } = DiscountPercentage / 100 * OriginalValue;
-    public ICollection<Product> Products { get; } = default!;
+    public Product Product { get; init; } = default!;
+    public float DiscountAmount { get; private set; } = default!;
+    public double OriginalValue { get; private set; } = default!;
+
+    public void DefineDiscountAmount(Promotion promotion)
+        => DiscountAmount = (float)(promotion.DiscountPercentage / 100 * promotion.OriginalValue);
+
+    public void DefineOriginalValue(Product product)
+        => OriginalValue = product.Price;
 }

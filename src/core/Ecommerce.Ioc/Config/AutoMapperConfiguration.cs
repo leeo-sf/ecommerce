@@ -18,6 +18,8 @@ public static class AutoMapperConfiguration
                 });
             config.CreateMap<Address, AddressDto>();
             config.CreateMap<Supplier, SupplierDto>();
+            config.CreateMap<Promotion, PromotionDto>();
+            config.CreateMap<Product, ProductDto>();
 
             config.CreateMap<DateTime?, DateOnly?>().ConvertUsing(src => src.HasValue 
                 ? DateOnly.FromDateTime(src.Value)

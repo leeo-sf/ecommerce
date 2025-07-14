@@ -14,6 +14,7 @@ public class AppDbContext : DbContext
     public DbSet<Category> Category { get; set; } = default!;
     public DbSet<Product> Product { get; set; } = default!;
     public DbSet<Coupon> Coupon { get; set; } = default!;
+    public DbSet<Promotion> Promotion { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
